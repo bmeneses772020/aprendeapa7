@@ -100,6 +100,21 @@ Si nunca has usado Git, la forma más simple es:
    ```
    (Reemplaza `TU-USUARIO` por tu usuario de GitHub y `ficha-apa` por el nombre real que le diste al repositorio.)
 
+## Actividades prácticas
+
+Además de texto, video y cuestionarios, el curso ahora tiene un cuarto tipo de lección: **actividad práctica**. Se completa en línea (con guardado automático, igual que el resto del progreso) y también se puede descargar como PDF para imprimir o completar a mano.
+
+Ya está armada la del Módulo 1 (`l1-6` en `src/App.jsx`, con su PDF en `public/actividad-practica-modulo1.pdf`).
+
+Para agregar otra actividad práctica a un módulo, copia el bloque de la lección `l1-6` dentro de `src/App.jsx` y ajusta:
+
+- `title`, `duration`, `intro`
+- `pdfHref` (si generas un PDF descargable para esa actividad; si no, puedes omitir esta propiedad)
+- `exercises`: cada ejercicio tiene un `kind`:
+  - `"choice-items"` — una lista de afirmaciones con dos botones (por ejemplo, sí/no) y un campo de texto de justificación.
+  - `"source-compare"` — un fragmento original y una versión del estudiante, con preguntas abiertas debajo.
+  - `"prompts"` — una o más preguntas abiertas simples.
+
 ## Progreso de los estudiantes
 
 El progreso (lecciones completadas, respuestas de las listas de chequeo, enlaces de video) se guarda en el navegador de cada estudiante mediante `localStorage`. Esto significa que:

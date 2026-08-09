@@ -13,6 +13,8 @@ import {
   Link2,
   ListChecks,
   Lock,
+  PenSquare,
+  Download,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -146,6 +148,62 @@ const COURSE = {
             "Reconozco en qué disciplinas se usa principalmente el estilo APA.",
             "Comprendo por qué un formato estandarizado facilita la lectura de un trabajo.",
             "Tengo claro cómo está organizado este curso (6 módulos + autoevaluaciones).",
+          ],
+        },
+        {
+          id: "l1-6",
+          type: "practica",
+          title: "Actividad práctica: reconoce cuándo citar",
+          duration: "15–20 min",
+          intro:
+            "Esta actividad te ayuda a practicar cuándo y por qué citar, antes de aprender los formatos específicos en los próximos módulos. No te preocupes todavía por el formato exacto de la cita — eso lo veremos a partir del Módulo 4. Aquí el objetivo es reconocer la idea.",
+          pdfHref: "/actividad-practica-modulo1.pdf",
+          exercises: [
+            {
+              id: "ex1",
+              kind: "choice-items",
+              title: "¿Necesita cita o no?",
+              instruction:
+                "Lee cada afirmación y marca si necesitaría una cita si la usaras en un trabajo académico. Justifica tu respuesta en una frase corta.",
+              items: [
+                { id: "a", text: "\u201cEl agua hierve a 100 °C al nivel del mar.\u201d" },
+                { id: "b", text: "\u201cEl 68% de los hogares bolivianos cuenta con acceso a internet, según datos del INE de 2023.\u201d" },
+                { id: "c", text: "\u201cLa motivación intrínseca influye más en el aprendizaje autónomo que la motivación extrínseca, de acuerdo con estudios recientes de psicología educativa.\u201d" },
+                { id: "d", text: "\u201cBolivia está ubicada en América del Sur.\u201d" },
+              ],
+            },
+            {
+              id: "ex2",
+              kind: "source-compare",
+              title: "Cita, parafraseo o plagio",
+              instruction:
+                "Lee el fragmento original y la versión que alguien escribió en su propio trabajo. Decide si es una cita apropiada, un parafraseo aceptable, o un plagio — y explica por qué.",
+              source: {
+                label: "Fragmento original",
+                quote:
+                  "\u201cEl aprendizaje autónomo depende de que el estudiante regule su propio proceso de manera consciente y sostenida en el tiempo.\u201d",
+                meta: "Meneses, B. (2024). Autorregulación y aprendizaje autónomo en la educación superior.",
+              },
+              studentVersion: {
+                label: "Versión que aparece en el trabajo de un estudiante",
+                quote:
+                  "\u201cEl aprendizaje autónomo depende de que el estudiante regule su propio proceso de manera consciente y sostenida en el tiempo.\u201d",
+              },
+              prompts: [
+                { id: "veredicto", label: "¿Cita, parafraseo o plagio? ¿Por qué?" },
+                { id: "reescritura", label: "Ahora inténtalo tú: reescribe el fragmento dando crédito a la autora, de la forma que consideres correcta" },
+              ],
+            },
+            {
+              id: "ex3",
+              kind: "prompts",
+              title: "Tu reflexión",
+              instruction: "Responde en tus propias palabras.",
+              prompts: [
+                { id: "q1", label: "¿Por qué existen las normas APA?" },
+                { id: "q2", label: "¿En qué situación de tu propia carrera vas a necesitar aplicarlas?" },
+              ],
+            },
           ],
         },
       ],
@@ -785,6 +843,7 @@ const TYPE_META = {
   video: { label: "VIDEO", Icon: PlayCircle },
   quiz: { label: "CUESTIONARIO", Icon: HelpCircle },
   checklist: { label: "LISTA DE CHEQUEO", Icon: ListChecks },
+  practica: { label: "ACTIVIDAD PRÁCTICA", Icon: PenSquare },
 };
 
 /* ------------------------------------------------------------------ */
@@ -796,6 +855,7 @@ export default function App({ onLock } = {}) {
   const [completed, setCompleted] = useState(new Set());
   const [videoLinks, setVideoLinks] = useState({});
   const [checklistState, setChecklistState] = useState({});
+  const [practiceAnswers, setPracticeAnswers] = useState({});
   const [loaded, setLoaded] = useState(false);
   const [saveState, setSaveState] = useState("idle"); // idle | saving | saved
   const [confirmReset, setConfirmReset] = useState(false);
@@ -810,6 +870,7 @@ export default function App({ onLock } = {}) {
         setCompleted(new Set(parsed.completed || []));
         setVideoLinks(parsed.videoLinks || {});
         setChecklistState(parsed.checklistState || {});
+        setPracticeAnswers(parsed.practiceAnswers || {});
         if (parsed.activeId && FLAT_LESSONS.some((l) => l.id === parsed.activeId)) {
           setActiveId(parsed.activeId);
         }
@@ -834,6 +895,7 @@ export default function App({ onLock } = {}) {
             completed: Array.from(completed),
             videoLinks,
             checklistState,
+            practiceAnswers,
             activeId,
           })
         );
@@ -843,7 +905,7 @@ export default function App({ onLock } = {}) {
       }
     }, 400);
     return () => clearTimeout(saveTimer.current);
-  }, [completed, videoLinks, checklistState, activeId, loaded]);
+  }, [completed, videoLinks, checklistState, practiceAnswers, activeId, loaded]);
 
   const markComplete = (id) => {
     setCompleted((prev) => {
@@ -857,6 +919,7 @@ export default function App({ onLock } = {}) {
     setCompleted(new Set());
     setVideoLinks({});
     setChecklistState({});
+    setPracticeAnswers({});
     setActiveId(FLAT_LESSONS[0].id);
     setConfirmReset(false);
     try {
@@ -1008,6 +1071,13 @@ export default function App({ onLock } = {}) {
                   return { ...prev, [active.id]: next };
                 })
               }
+              practiceValues={practiceAnswers[active.id] || {}}
+              onPracticeChange={(fieldKey, value) =>
+                setPracticeAnswers((prev) => ({
+                  ...prev,
+                  [active.id]: { ...(prev[active.id] || {}), [fieldKey]: value },
+                }))
+              }
               onComplete={() => markComplete(active.id)}
               onNext={goNext}
               hasNext={Boolean(nextLesson)}
@@ -1032,6 +1102,8 @@ function LessonCard({
   onSetVideoLink,
   checkedItems,
   onToggleItem,
+  practiceValues,
+  onPracticeChange,
   onComplete,
   onNext,
   hasNext,
@@ -1077,6 +1149,13 @@ function LessonCard({
             lesson={lesson}
             checkedItems={checkedItems}
             onToggleItem={onToggleItem}
+          />
+        )}
+        {lesson.type === "practica" && (
+          <PracticaLesson
+            lesson={lesson}
+            values={practiceValues}
+            onChange={onPracticeChange}
           />
         )}
       </div>
@@ -1287,6 +1366,104 @@ function ChecklistLesson({ lesson, checkedItems, onToggleItem }) {
           Has revisado todos los puntos de esta lista.
         </div>
       )}
+    </div>
+  );
+}
+
+function PracticaLesson({ lesson, values, onChange }) {
+  return (
+    <div className="fa-practica">
+      <p className="fa-practica-intro">{lesson.intro}</p>
+
+      {lesson.pdfHref && (
+        <a className="fa-practica-download" href={lesson.pdfHref} download target="_blank" rel="noreferrer">
+          <Download size={15} strokeWidth={2} />
+          Descargar esta actividad en PDF
+        </a>
+      )}
+
+      {lesson.exercises.map((ex, i) => (
+        <div className="fa-practica-exercise" key={ex.id}>
+          <div className="fa-practica-exercise-head">
+            <span className="fa-practica-num">{i + 1}</span>
+            <span className="fa-practica-title">{ex.title}</span>
+          </div>
+          <p className="fa-practica-instruction">{ex.instruction}</p>
+
+          {ex.kind === "choice-items" &&
+            ex.items.map((item) => {
+              const choiceKey = `${ex.id}-${item.id}-choice`;
+              const justifKey = `${ex.id}-${item.id}-justif`;
+              const choice = values[choiceKey];
+              return (
+                <div className="fa-practica-item" key={item.id}>
+                  <p className="fa-practica-item-text">{item.text}</p>
+                  <div className="fa-practica-choices">
+                    <button
+                      type="button"
+                      className={`fa-practica-choice${choice === "si" ? " is-selected" : ""}`}
+                      onClick={() => onChange(choiceKey, choice === "si" ? "" : "si")}
+                    >
+                      Necesita cita
+                    </button>
+                    <button
+                      type="button"
+                      className={`fa-practica-choice${choice === "no" ? " is-selected" : ""}`}
+                      onClick={() => onChange(choiceKey, choice === "no" ? "" : "no")}
+                    >
+                      No necesita cita
+                    </button>
+                  </div>
+                  <textarea
+                    className="fa-practica-textarea"
+                    placeholder="Justifica tu respuesta en una frase corta…"
+                    rows={2}
+                    value={values[justifKey] || ""}
+                    onChange={(e) => onChange(justifKey, e.target.value)}
+                  />
+                </div>
+              );
+            })}
+
+          {ex.kind === "source-compare" && (
+            <>
+              <div className="fa-practica-source">
+                <span className="fa-practica-source-label">{ex.source.label}</span>
+                <p className="fa-practica-source-quote">{ex.source.quote}</p>
+                <p className="fa-practica-source-meta">{ex.source.meta}</p>
+              </div>
+              <div className="fa-practica-source">
+                <span className="fa-practica-source-label">{ex.studentVersion.label}</span>
+                <p className="fa-practica-source-quote">{ex.studentVersion.quote}</p>
+              </div>
+              {ex.prompts.map((p) => (
+                <div className="fa-practica-prompt" key={p.id}>
+                  <label className="fa-practica-prompt-label">{p.label}</label>
+                  <textarea
+                    className="fa-practica-textarea"
+                    rows={3}
+                    value={values[`${ex.id}-${p.id}`] || ""}
+                    onChange={(e) => onChange(`${ex.id}-${p.id}`, e.target.value)}
+                  />
+                </div>
+              ))}
+            </>
+          )}
+
+          {ex.kind === "prompts" &&
+            ex.prompts.map((p) => (
+              <div className="fa-practica-prompt" key={p.id}>
+                <label className="fa-practica-prompt-label">{p.label}</label>
+                <textarea
+                  className="fa-practica-textarea"
+                  rows={3}
+                  value={values[`${ex.id}-${p.id}`] || ""}
+                  onChange={(e) => onChange(`${ex.id}-${p.id}`, e.target.value)}
+                />
+              </div>
+            ))}
+        </div>
+      ))}
     </div>
   );
 }
@@ -1846,6 +2023,69 @@ function Fonts() {
       .fa-checklist-done {
         display: flex; align-items: center; gap: 7px;
         margin-top: 14px; font-size: 13px; color: var(--sage); font-weight: 600;
+      }
+
+      /* ---- Actividad práctica ---- */
+      .fa-practica-intro { font-size: 14px; color: var(--text-soft); line-height: 1.65; margin: 0 0 14px 0; }
+      .fa-practica-download {
+        display: inline-flex; align-items: center; gap: 7px;
+        background: var(--ink); color: var(--paper); text-decoration: none;
+        border-radius: 7px; padding: 9px 15px; font-size: 12.5px; font-weight: 600;
+        margin-bottom: 22px;
+      }
+      .fa-practica-download:hover { background: var(--ink-soft); }
+
+      .fa-practica-exercise {
+        border-top: 1px dashed var(--line);
+        padding-top: 18px;
+        margin-top: 18px;
+      }
+      .fa-practica-exercise:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+      .fa-practica-exercise-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+      .fa-practica-num {
+        width: 24px; height: 24px; border-radius: 50%; background: var(--gold); color: var(--paper);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 12.5px; flex-shrink: 0;
+      }
+      .fa-practica-title { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 16px; color: var(--ink); }
+      .fa-practica-instruction { font-size: 13px; color: var(--text-soft); margin: 0 0 12px 34px; line-height: 1.5; }
+
+      .fa-practica-item {
+        margin: 0 0 12px 34px;
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 8px;
+        padding: 12px 14px;
+      }
+      .fa-practica-item-text { font-size: 13.5px; color: var(--text); margin: 0 0 9px 0; line-height: 1.5; }
+      .fa-practica-choices { display: flex; gap: 8px; margin-bottom: 8px; }
+      .fa-practica-choice {
+        border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
+        padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--text-soft); cursor: pointer;
+      }
+      .fa-practica-choice:hover { border-color: var(--gold); }
+      .fa-practica-choice.is-selected { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+      .fa-practica-textarea {
+        width: 100%; border: 1px solid var(--line); border-radius: 6px;
+        padding: 8px 10px; font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text);
+        background: var(--paper); resize: vertical;
+      }
+      .fa-practica-textarea:focus { outline: none; border-color: var(--gold); }
+
+      .fa-practica-source {
+        margin: 0 0 10px 34px;
+        background: rgba(201,138,46,0.08); border: 1px solid var(--line); border-radius: 8px;
+        padding: 12px 14px;
+      }
+      .fa-practica-source-label {
+        display: block; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; font-weight: 700;
+        letter-spacing: 0.8px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+      }
+      .fa-practica-source-quote { font-style: italic; font-size: 13.5px; color: var(--text); margin: 0; line-height: 1.5; }
+      .fa-practica-source-meta { font-size: 11.5px; color: var(--text-soft); margin: 6px 0 0 0; }
+
+      .fa-practica-prompt { margin: 0 0 12px 34px; }
+      .fa-practica-prompt-label {
+        display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px;
       }
 
       /* ---- Quiz ---- */
