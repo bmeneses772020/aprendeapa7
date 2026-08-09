@@ -2,7 +2,60 @@
 
 Curso de autogestión del aprendizaje sobre las normas APA 7.ª edición, construido con React + Vite.
 
-Incluye 6 módulos, 31 lecciones (texto, video y cuestionarios), listas de chequeo, y progreso guardado automáticamente en el navegador del estudiante (usando `localStorage`).
+Incluye 6 módulos, 31 lecciones (texto, video y cuestionarios), listas de chequeo, progreso guardado automáticamente en el navegador del estudiante, y una **página de ventas con candado de código de acceso** para vender el curso.
+
+## Cómo funciona el sistema de venta
+
+El sitio ahora tiene dos partes:
+
+1. **Página de ventas** (lo primero que ve cualquier visitante): explica el curso, muestra tu QR de pago y tus datos de transferencia bancaria, y tiene un botón de WhatsApp para que te envíen el comprobante.
+2. **El curso completo**: solo se desbloquea cuando la persona ingresa un código de acceso válido. Una vez desbloqueado, queda guardado en ese navegador (no tiene que volver a ingresarlo).
+
+### Antes de publicar: edita tu información
+
+Abre el archivo `src/Landing.jsx` y edita el bloque `CONFIG` al principio del archivo:
+
+```js
+const CONFIG = {
+  precioUsd: "5",
+  precioBs: "35",
+  whatsappNumero: "59100000000",   // tu número con código de país, sin +, sin espacios
+  whatsappMensaje: "...",
+  correoContacto: "tu-correo@ejemplo.com",
+  banco: "Nombre del banco",
+  titular: "Betty Meneses Ayllón",
+  numeroCuenta: "0000000000",
+  tipoCuenta: "Caja de ahorro / Cuenta corriente",
+};
+```
+
+### Cómo agregar tu imagen de QR real
+
+Ahora mismo se muestra una caja de ejemplo en lugar de tu QR. Para usar tu QR real:
+
+1. Guarda tu imagen de QR como `qr.png` dentro de una carpeta llamada `public/` en la raíz del proyecto (créala si no existe).
+2. En `src/Landing.jsx`, busca el bloque `<div className="ld-qr-box">` y reemplázalo por:
+   ```jsx
+   <img src="/qr.png" alt="Código QR para pagar" style={{ width: "100%", maxWidth: 220, borderRadius: 8 }} />
+   ```
+
+### Cómo cambiar o agregar códigos de acceso
+
+Abre `src/Gate.jsx` y edita la lista `VALID_CODES`:
+
+```js
+const VALID_CODES = ["APA-AGOSTO2026"];
+```
+
+Puedes agregar varios códigos a la vez (por ejemplo, uno por mes, o uno por grupo de estudiantes):
+
+```js
+const VALID_CODES = ["APA-AGOSTO2026", "APA-SEPTIEMBRE2026", "GRUPO-METODOLOGIA"];
+```
+
+Cada vez que cambies este archivo, necesitas subir el cambio a GitHub para que se actualice en el sitio publicado (Vercel lo vuelve a publicar automáticamente).
+
+**Importante sobre seguridad:** este candado es simple a propósito — no requiere base de datos ni servidor. Es adecuado para un curso de bajo costo, igual que la carpeta compartida con la que empezaste. El código queda dentro del archivo público del sitio, así que alguien con conocimientos técnicos podría encontrarlo revisando el código fuente. Para la mayoría de los casos esto es una molestia menor, no un problema real — pero si más adelante vendes algo de mayor valor, conviene pasar a una plataforma con pagos automatizados (como Hotmart) o a un sistema con backend real.
 
 ## Requisitos
 
@@ -58,3 +111,4 @@ El progreso (lecciones completadas, respuestas de las listas de chequeo, enlaces
 ## Autora
 
 Msc. Betty Meneses Ayllón — Universidad Privada Domingo Savio
+

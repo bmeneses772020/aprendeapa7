@@ -12,6 +12,7 @@ import {
   BookOpen,
   Link2,
   ListChecks,
+  Lock,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -790,7 +791,7 @@ const TYPE_META = {
 /* APP                                                                  */
 /* ------------------------------------------------------------------ */
 
-export default function App() {
+export default function App({ onLock } = {}) {
   const [activeId, setActiveId] = useState(FLAT_LESSONS[0].id);
   const [completed, setCompleted] = useState(new Set());
   const [videoLinks, setVideoLinks] = useState({});
@@ -974,6 +975,12 @@ export default function App() {
               <button className="fa-reset-btn" onClick={() => setConfirmReset(true)}>
                 <RotateCcw size={13} strokeWidth={2} />
                 Reiniciar progreso
+              </button>
+            )}
+            {onLock && (
+              <button className="fa-reset-btn" onClick={onLock} style={{ marginTop: "2px" }}>
+                <Lock size={13} strokeWidth={2} />
+                Bloquear acceso de nuevo
               </button>
             )}
           </div>
