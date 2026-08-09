@@ -102,7 +102,7 @@ export default function Landing({ onUnlock }) {
         <div className="ld-grid-4">
           <div className="ld-feature">
             <FileText size={20} strokeWidth={2} />
-            <span>32 lecciones de lectura, práctica y video</span>
+            <span>33 lecciones de lectura, práctica y video</span>
           </div>
           <div className="ld-feature">
             <PlayCircle size={20} strokeWidth={2} />

@@ -104,7 +104,7 @@ Si nunca has usado Git, la forma más simple es:
 
 Además de texto, video y cuestionarios, el curso ahora tiene un cuarto tipo de lección: **actividad práctica**. Se completa en línea (con guardado automático, igual que el resto del progreso) y también se puede descargar como PDF para imprimir o completar a mano.
 
-Ya está armada la del Módulo 1 (`l1-6` en `src/App.jsx`, con su PDF en `public/actividad-practica-modulo1.pdf`).
+Ya están armadas las actividades de los Módulos 1 y 2 (`l1-6` y `l2-6` en `src/App.jsx`, con sus PDF en `public/actividad-practica-modulo1.pdf` y `public/actividad-practica-modulo2.pdf`).
 
 Para agregar otra actividad práctica a un módulo, copia el bloque de la lección `l1-6` dentro de `src/App.jsx` y ajusta:
 

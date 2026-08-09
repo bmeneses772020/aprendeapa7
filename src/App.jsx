@@ -165,6 +165,7 @@ const COURSE = {
               title: "¿Necesita cita o no?",
               instruction:
                 "Lee cada afirmación y marca si necesitaría una cita si la usaras en un trabajo académico. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Necesita cita", "No necesita cita"],
               items: [
                 { id: "a", text: "\u201cEl agua hierve a 100 °C al nivel del mar.\u201d" },
                 { id: "b", text: "\u201cEl 68% de los hogares bolivianos cuenta con acceso a internet, según datos del INE de 2023.\u201d" },
@@ -317,6 +318,60 @@ const COURSE = {
             "La primera línea de cada párrafo tiene sangría de 1.27 cm.",
             "Mi portada corresponde al formato estudiantil (o profesional, si el docente lo indicó así).",
             "El número de página aparece en la esquina superior derecha desde la portada.",
+          ],
+        },
+        {
+          id: "l2-6",
+          type: "practica",
+          title: "Actividad práctica: formato y portada",
+          duration: "15–20 min",
+          intro:
+            "Esta actividad te ayuda a repasar los parámetros de formato y a decidir qué tipo de portada corresponde en cada caso, antes de armar la tuya con tus propios datos.",
+          pdfHref: "/actividad-practica-modulo2.pdf",
+          exercises: [
+            {
+              id: "ex1",
+              kind: "choice-items",
+              title: "Detecta el error de formato",
+              instruction:
+                "Lee cada afirmación sobre cómo alguien formateó su documento y marca si el formato es correcto o incorrecto según APA 7. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Correcto", "Incorrecto"],
+              items: [
+                { id: "a", text: "\u201cUsé Times New Roman 12 pt para el cuerpo del texto, y Calibri 11 pt para las citas en bloque.\u201d" },
+                { id: "b", text: "\u201cConfiguré márgenes de 2.54 cm en los cuatro lados de la página.\u201d" },
+                { id: "c", text: "\u201cDejé una línea en blanco entre cada párrafo, además del interlineado doble.\u201d" },
+                { id: "d", text: "\u201cLa numeración de página empieza en la portada, en la esquina superior derecha.\u201d" },
+              ],
+            },
+            {
+              id: "ex2",
+              kind: "choice-items",
+              title: "¿Portada estudiantil o profesional?",
+              instruction:
+                "Lee cada situación y decide qué tipo de portada corresponde. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Estudiantil", "Profesional"],
+              items: [
+                { id: "a", text: "Vas a entregar un ensayo para tu clase de Metodología de la Investigación Científica." },
+                { id: "b", text: "Vas a enviar un artículo a una revista científica para su publicación." },
+                { id: "c", text: "Tu docente te pide explícitamente incluir un encabezado (running head) en tu trabajo de curso." },
+                { id: "d", text: "Es la tesis que presentarás para tu grado, sin instrucciones especiales de tu comité." },
+              ],
+            },
+            {
+              id: "ex3",
+              kind: "prompts",
+              title: "Arma los datos de tu propia portada",
+              instruction:
+                "Completa cada campo con tus propios datos, en el orden en que aparecerían en una portada estudiantil.",
+              prompts: [
+                { id: "titulo", label: "Título de tu trabajo" },
+                { id: "autor", label: "Tu nombre completo" },
+                { id: "afiliacion", label: "Departamento y universidad" },
+                { id: "curso", label: "Número y nombre de la asignatura" },
+                { id: "docente", label: "Nombre del docente" },
+                { id: "fecha", label: "Fecha de entrega" },
+              ],
+            },
           ],
         },
       ],
@@ -1395,23 +1450,24 @@ function PracticaLesson({ lesson, values, onChange }) {
               const choiceKey = `${ex.id}-${item.id}-choice`;
               const justifKey = `${ex.id}-${item.id}-justif`;
               const choice = values[choiceKey];
+              const [labelA, labelB] = ex.choiceLabels || ["Sí", "No"];
               return (
                 <div className="fa-practica-item" key={item.id}>
                   <p className="fa-practica-item-text">{item.text}</p>
                   <div className="fa-practica-choices">
                     <button
                       type="button"
-                      className={`fa-practica-choice${choice === "si" ? " is-selected" : ""}`}
-                      onClick={() => onChange(choiceKey, choice === "si" ? "" : "si")}
+                      className={`fa-practica-choice${choice === "a" ? " is-selected" : ""}`}
+                      onClick={() => onChange(choiceKey, choice === "a" ? "" : "a")}
                     >
-                      Necesita cita
+                      {labelA}
                     </button>
                     <button
                       type="button"
-                      className={`fa-practica-choice${choice === "no" ? " is-selected" : ""}`}
-                      onClick={() => onChange(choiceKey, choice === "no" ? "" : "no")}
+                      className={`fa-practica-choice${choice === "b" ? " is-selected" : ""}`}
+                      onClick={() => onChange(choiceKey, choice === "b" ? "" : "b")}
                     >
-                      No necesita cita
+                      {labelB}
                     </button>
                   </div>
                   <textarea
