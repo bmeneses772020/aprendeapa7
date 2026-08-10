@@ -225,7 +225,7 @@ export default function Landing({ onUnlock }) {
 
       <footer className="ld-footer">
         <CheckCircle2 size={14} strokeWidth={2} />
-        <span>Msc. Betty Meneses Ayllón · Universidad Privada Domingo Savio</span>
+        <span>Msc. Betty Meneses Ayllón</span>
       </footer>
     </div>
   );
