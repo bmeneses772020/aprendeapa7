@@ -508,6 +508,59 @@ const COURSE = {
             "Ningún encabezado queda solo al final de una página, sin texto debajo.",
           ],
         },
+        {
+          id: "l6-6",
+          type: "practica",
+          title: "Actividad práctica: identifica y aplica los niveles",
+          duration: "15–20 min",
+          intro:
+            "Esta actividad te ayuda a reconocer cada nivel de encabezado por su formato, a detectar errores comunes de jerarquía, y a aplicar los niveles a tu propio trabajo.",
+          pdfHref: "/actividad-practica-modulo3.pdf",
+          exercises: [
+            {
+              id: "ex1",
+              kind: "choice-items",
+              title: "¿Qué nivel es?",
+              instruction:
+                "Lee la descripción de cada encabezado y marca a qué nivel corresponde. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4", "Nivel 5"],
+              items: [
+                { id: "a", text: "Centrado, en negrita, sin cursiva: \u201cResultados\u201d" },
+                { id: "b", text: "Alineado a la izquierda, en negrita, sin cursiva: \u201cParticipantes\u201d" },
+                { id: "c", text: "Alineado a la izquierda, en negrita y cursiva: \u201cInstrumentos de recolección\u201d" },
+                { id: "d", text: "Con sangría de párrafo, en negrita, termina en punto y el texto continúa en la misma línea: \u201cProcedimiento de recolección. Se aplicó un cuestionario en línea…\u201d" },
+                { id: "e", text: "Con sangría de párrafo, en negrita y cursiva, termina en punto: \u201cAnálisis estadístico. Se utilizó estadística descriptiva…\u201d" },
+              ],
+            },
+            {
+              id: "ex2",
+              kind: "choice-items",
+              title: "¿Sigue las reglas de jerarquía?",
+              instruction:
+                "Lee cada situación y decide si respeta las reglas de jerarquía de encabezados. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Correcto", "Incorrecto"],
+              items: [
+                { id: "a", text: "\u201cMi documento usa Nivel 1 para \u2018Método\u2019 y, dentro de esa sección, Nivel 2 para \u2018Participantes\u2019.\u201d" },
+                { id: "b", text: "\u201cSalté directamente del Nivel 1 al Nivel 3 porque no necesitaba un nivel intermedio.\u201d" },
+                { id: "c", text: "\u201cNuméré mis encabezados como 1., 1.1, 1.2 para que se vea más ordenado.\u201d" },
+                { id: "d", text: "\u201cEl título de mi trabajo, en la portada, lo conté como mi encabezado de Nivel 1.\u201d" },
+                { id: "e", text: "\u201cAjusté el salto de página porque un encabezado había quedado solo al final de una hoja.\u201d" },
+              ],
+            },
+            {
+              id: "ex3",
+              kind: "prompts",
+              title: "Aplica la jerarquía a tu propio trabajo",
+              instruction:
+                "Piensa en un trabajo que estés escribiendo (o uno futuro) y completa la jerarquía con tus propios encabezados.",
+              prompts: [
+                { id: "n1", label: "Una sección principal de tu trabajo (será tu encabezado de Nivel 1)" },
+                { id: "n2", label: "Una subsección dentro de ella (Nivel 2)" },
+                { id: "n3", label: "Si tuvieras que profundizar aún más, ¿qué subdivisión usarías? (Nivel 3)" },
+              ],
+            },
+          ],
+        },
       ],
     },
     {
@@ -608,6 +661,59 @@ const COURSE = {
             "Con dos autores, uso '&' en la cita entre paréntesis y 'y' en la cita narrativa.",
             "Con tres o más autores, uso 'et al.' desde la primera cita.",
             "Mis parafraseos están escritos con mis propias palabras y llevan su cita, no son una copia disfrazada del original.",
+          ],
+        },
+        {
+          id: "l3-7",
+          type: "practica",
+          title: "Actividad práctica: identifica y aplica las citas",
+          duration: "15–20 min",
+          intro:
+            "Esta actividad te ayuda a reconocer las distintas formas de citar con solo leerlas, y a aplicar correctamente las reglas de autores múltiples.",
+          pdfHref: "/actividad-practica-modulo4.pdf",
+          exercises: [
+            {
+              id: "ex1",
+              kind: "choice-items",
+              title: "¿Narrativa o entre paréntesis?",
+              instruction:
+                "Lee cada oración y marca qué forma de cita utiliza. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Narrativa", "Entre paréntesis"],
+              items: [
+                { id: "a", text: "\u201cTobón (2013) sostiene que la evaluación por competencias exige evidencias observables.\u201d" },
+                { id: "b", text: "\u201cLa evaluación por competencias exige evidencias observables (Tobón, 2013).\u201d" },
+                { id: "c", text: "\u201cPérez y Gómez (2022) encontraron que la autorregulación mejora con el uso de calendarios de estudio.\u201d" },
+                { id: "d", text: "\u201cLa autorregulación mejora con el uso de calendarios de estudio (Pérez & Gómez, 2022).\u201d" },
+              ],
+            },
+            {
+              id: "ex2",
+              kind: "choice-items",
+              title: "Cita textual corta, cita en bloque o parafraseo",
+              instruction:
+                "Lee cada fragmento y marca qué tipo de cita es. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Cita textual corta", "Cita en bloque", "Parafraseo"],
+              items: [
+                { id: "a", text: "\u201cEl aprendizaje autónomo requiere \u2018autorregulación constante\u2019 (Meneses, 2024, p. 12).\u201d" },
+                { id: "b", text: "\u201cEl aprendizaje autónomo depende de que el estudiante regule su propio proceso, según plantea Meneses (2024).\u201d" },
+                { id: "c", text: "\u201cEl aprendizaje autónomo depende de un conjunto de estrategias de autorregulación que el estudiante despliega de manera consciente, incluyendo la planificación de metas, el monitoreo de su propio avance y la evaluación crítica de los resultados obtenidos (Meneses, 2024, p. 8).\u201d — presentado en párrafo aparte, con sangría completa" },
+                { id: "d", text: "\u201cMeneses (2024) explica que \u2018la autorregulación depende de la constancia y la disciplina del estudiante\u2019 (p. 8).\u201d" },
+              ],
+            },
+            {
+              id: "ex3",
+              kind: "choice-items",
+              title: "Múltiples autores: ¿correcto o incorrecto?",
+              instruction:
+                "Lee cada ejemplo de cita con más de un autor y decide si sigue correctamente las reglas de APA 7. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Correcto", "Incorrecto"],
+              items: [
+                { id: "a", text: "\u201c(Pérez & Gómez, 2022)\u201d usado como cita entre paréntesis con dos autores." },
+                { id: "b", text: "\u201cPérez y Gómez (2022) señalan que\u2026\u201d usado como cita narrativa con dos autores." },
+                { id: "c", text: "\u201c(Rojas, Díaz, Fernández & Salas, 2021)\u201d citando por primera vez un trabajo de cuatro autores, nombrando a todos." },
+                { id: "d", text: "\u201c(Rojas et al., 2021)\u201d para citar, desde la primera mención, un trabajo con cuatro autores." },
+              ],
+            },
           ],
         },
       ],
@@ -725,6 +831,65 @@ const COURSE = {
             "Los títulos de libros y artículos usan mayúscula tipo oración (solo la primera palabra y nombres propios).",
             "Cada fuente citada en el texto aparece en la lista de referencias, y viceversa.",
             "Los DOI están escritos en formato de enlace (https://doi.org/...).",
+          ],
+        },
+        {
+          id: "l4-6",
+          type: "practica",
+          title: "Actividad práctica: arma y corrige referencias",
+          duration: "15–20 min",
+          intro:
+            "Esta actividad te ayuda a detectar errores comunes en la lista de referencias, a reconocer el tipo de fuente a partir de una entrada ya formateada, y a construir tus propias referencias desde los datos crudos de una fuente.",
+          pdfHref: "/actividad-practica-modulo5.pdf",
+          exercises: [
+            {
+              id: "ex1",
+              kind: "choice-items",
+              title: "Detecta el error en la referencia",
+              instruction:
+                "Lee cada afirmación sobre cómo alguien armó su lista de referencias y marca si es correcta o incorrecta según APA 7. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Correcto", "Incorrecto"],
+              items: [
+                { id: "a", text: "\u201cOrdené mis referencias por año de publicación, de más reciente a más antiguo.\u201d" },
+                { id: "b", text: "\u201cEscribí el título del libro con mayúscula en cada palabra principal.\u201d" },
+                { id: "c", text: "\u201cApliqué sangría francesa: la primera línea al margen, las siguientes a 1.27 cm.\u201d" },
+                { id: "d", text: "\u201cPresenté el DOI como enlace: https://doi.org/10.xxxx/xxxxx\u201d" },
+                { id: "e", text: "\u201cEscribí \u2018Recuperado de\u2019 antes del enlace de un artículo con DOI.\u201d" },
+              ],
+            },
+            {
+              id: "ex2",
+              kind: "choice-items",
+              title: "¿Qué tipo de fuente es?",
+              instruction:
+                "Lee cada referencia ya formateada y marca de qué tipo de fuente se trata.",
+              choiceLabels: ["Libro", "Artículo con DOI", "Página web"],
+              items: [
+                { id: "a", text: "Tobón, S. (2013). Formación integral y competencias: Pensamiento complejo, currículo, didáctica y evaluación (4.ª ed.). ECOE Ediciones." },
+                { id: "b", text: "Pérez, J., & Gómez, L. (2022). Autorregulación del aprendizaje en entornos virtuales. Revista de Educación Superior, 15(2), 45–60. https://doi.org/10.xxxx/xxxxx" },
+                { id: "c", text: "Organización Mundial de la Salud. (2021, 15 de marzo). Salud mental de los adolescentes. https://www.who.int/es/news-room/fact-sheets/detail/adolescent-mental-health" },
+                { id: "d", text: "Meneses, B. (2024). Autorregulación y aprendizaje autónomo en la educación superior. Editorial Universitaria." },
+              ],
+            },
+            {
+              id: "ex3",
+              kind: "prompts",
+              title: "Arma tu propia referencia",
+              instruction:
+                "Con los datos de cada fuente, escribe la referencia completa en el orden y formato correcto.",
+              prompts: [
+                {
+                  id: "libro",
+                  label:
+                    "Datos de la fuente (libro):\nAutores: Cobo, C. y Moravec, J.\nAño: 2011\nTítulo: Aprendizaje invisible. Hacia una nueva ecología de la educación.\nLugar: Barcelona, España\nEditorial: UOC\n\nEscribe la referencia completa:",
+                },
+                {
+                  id: "articulo",
+                  label:
+                    "Datos de la fuente (artículo):\nAutores: Rueda-Toro, J., Arana, M., Buitrago, N., Sánchez, M., Pineda, A. y Orcasita, L.\nAño: 2019\nTítulo: Creencias de género, prácticas de crianza y apoyo social percibido: el caso de una pareja homosexual y una heterosexual\nFuente: Revista de Psicología Universidad de Antioquia, 11(2), 151-176\nDOI: https://doi.org/10.17533/udea.rp.v11n2a06\n\nEscribe la referencia completa:",
+                },
+              ],
+            },
           ],
         },
       ],
@@ -859,6 +1024,59 @@ const COURSE = {
             "Incluyo una nota al pie cuando es necesario explicar abreviaturas, la fuente de los datos o la significancia estadística.",
             "Cada tabla y figura está mencionada en el texto antes de su aparición (por ejemplo, 'como se observa en la Tabla 1…').",
             "Las tablas y las figuras llevan numeración independiente entre sí (Tabla 1, 2… por un lado; Figura 1, 2… por otro).",
+          ],
+        },
+        {
+          id: "l5-6",
+          type: "practica",
+          title: "Actividad práctica: detecta errores y diseña tu tabla",
+          duration: "15–20 min",
+          intro:
+            "Esta última actividad te ayuda a detectar errores comunes de formato en tablas y figuras, a distinguir los tres tipos de nota, y a diseñar una tabla para tu propio trabajo.",
+          pdfHref: "/actividad-practica-modulo6.pdf",
+          exercises: [
+            {
+              id: "ex1",
+              kind: "choice-items",
+              title: "Detecta el error de formato",
+              instruction:
+                "Lee cada afirmación sobre cómo alguien formateó su tabla o figura y marca si es correcta o incorrecta según APA 7. Justifica tu respuesta en una frase corta.",
+              choiceLabels: ["Correcto", "Incorrecto"],
+              items: [
+                { id: "a", text: "\u201cAgregué líneas verticales entre cada columna para que se vea más ordenada mi tabla.\u201d" },
+                { id: "b", text: "\u201cEl número de mi tabla va en negrita, arriba del título.\u201d" },
+                { id: "c", text: "\u201cEscribí el título de mi tabla con mayúscula en cada palabra principal, en cursiva.\u201d" },
+                { id: "d", text: "\u201cNuméré mis tablas y figuras en una sola secuencia conjunta (1, 2, 3\u2026).\u201d" },
+                { id: "e", text: "\u201cMencioné la Tabla 1 en el texto antes de que apareciera.\u201d" },
+              ],
+            },
+            {
+              id: "ex2",
+              kind: "choice-items",
+              title: "¿Qué tipo de nota es?",
+              instruction:
+                "Lee cada nota y marca a qué tipo corresponde.",
+              choiceLabels: ["Nota general", "Nota específica", "Nota de probabilidad"],
+              items: [
+                { id: "a", text: "\u201cNota. Los datos se recolectaron en el segundo semestre de 2025.\u201d" },
+                { id: "b", text: "\u201c\u1d43 Grupo reasignado tras abandono inicial.\u201d" },
+                { id: "c", text: "\u201c*p < .05. **p < .01.\u201d" },
+                { id: "d", text: "\u201cNota. M = media; DE = desviación estándar.\u201d" },
+              ],
+            },
+            {
+              id: "ex3",
+              kind: "prompts",
+              title: "Diseña tu propia tabla",
+              instruction:
+                "Piensa en un dato de tu propio trabajo que se explicaría mejor con una tabla, y complétalo aquí.",
+              prompts: [
+                { id: "numero", label: "¿Qué número le corresponde? (Tabla 1, Tabla 2…)" },
+                { id: "titulo", label: "Escribe el título de esa tabla, en cursiva y con mayúscula tipo título" },
+                { id: "columnas", label: "¿Qué columnas tendría? (por ejemplo: Grupo, n, M, DE)" },
+                { id: "nota", label: "¿Necesitarías alguna nota al pie? Si es así, escríbela" },
+              ],
+            },
           ],
         },
       ],
@@ -1450,25 +1668,24 @@ function PracticaLesson({ lesson, values, onChange }) {
               const choiceKey = `${ex.id}-${item.id}-choice`;
               const justifKey = `${ex.id}-${item.id}-justif`;
               const choice = values[choiceKey];
-              const [labelA, labelB] = ex.choiceLabels || ["Sí", "No"];
+              const labels = ex.choiceLabels || ["Sí", "No"];
               return (
                 <div className="fa-practica-item" key={item.id}>
                   <p className="fa-practica-item-text">{item.text}</p>
                   <div className="fa-practica-choices">
-                    <button
-                      type="button"
-                      className={`fa-practica-choice${choice === "a" ? " is-selected" : ""}`}
-                      onClick={() => onChange(choiceKey, choice === "a" ? "" : "a")}
-                    >
-                      {labelA}
-                    </button>
-                    <button
-                      type="button"
-                      className={`fa-practica-choice${choice === "b" ? " is-selected" : ""}`}
-                      onClick={() => onChange(choiceKey, choice === "b" ? "" : "b")}
-                    >
-                      {labelB}
-                    </button>
+                    {labels.map((label, li) => {
+                      const val = String(li);
+                      return (
+                        <button
+                          key={val}
+                          type="button"
+                          className={`fa-practica-choice${choice === val ? " is-selected" : ""}`}
+                          onClick={() => onChange(choiceKey, choice === val ? "" : val)}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
                   </div>
                   <textarea
                     className="fa-practica-textarea"
@@ -2104,7 +2321,7 @@ function Fonts() {
         font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 12.5px; flex-shrink: 0;
       }
       .fa-practica-title { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 16px; color: var(--ink); }
-      .fa-practica-instruction { font-size: 13px; color: var(--text-soft); margin: 0 0 12px 34px; line-height: 1.5; }
+      .fa-practica-instruction { font-size: 13px; color: var(--text-soft); margin: 0 0 12px 34px; line-height: 1.5; white-space: pre-line; }
 
       .fa-practica-item {
         margin: 0 0 12px 34px;
@@ -2112,7 +2329,7 @@ function Fonts() {
         padding: 12px 14px;
       }
       .fa-practica-item-text { font-size: 13.5px; color: var(--text); margin: 0 0 9px 0; line-height: 1.5; }
-      .fa-practica-choices { display: flex; gap: 8px; margin-bottom: 8px; }
+      .fa-practica-choices { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
       .fa-practica-choice {
         border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
         padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--text-soft); cursor: pointer;
@@ -2142,6 +2359,7 @@ function Fonts() {
       .fa-practica-prompt { margin: 0 0 12px 34px; }
       .fa-practica-prompt-label {
         display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px;
+        white-space: pre-line; line-height: 1.5;
       }
 
       /* ---- Quiz ---- */

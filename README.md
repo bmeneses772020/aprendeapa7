@@ -104,7 +104,11 @@ Si nunca has usado Git, la forma más simple es:
 
 Además de texto, video y cuestionarios, el curso ahora tiene un cuarto tipo de lección: **actividad práctica**. Se completa en línea (con guardado automático, igual que el resto del progreso) y también se puede descargar como PDF para imprimir o completar a mano.
 
-Ya están armadas las actividades de los Módulos 1 y 2 (`l1-6` y `l2-6` en `src/App.jsx`, con sus PDF en `public/actividad-practica-modulo1.pdf` y `public/actividad-practica-modulo2.pdf`).
+Las 6 actividades prácticas del curso ya están completas — una por módulo (`l1-6`, `l2-6`, `l6-6`, `l3-7`, `l4-6` y `l5-6` en `src/App.jsx`), cada una con su PDF descargable en `public/actividad-practica-modulo1.pdf` a `public/actividad-practica-modulo6.pdf`.
+
+Los campos de instrucción (`instruction`) y de etiqueta de pregunta (`prompts[].label`) admiten saltos de línea (`\n`) — útil, por ejemplo, para mostrar los datos crudos de una fuente antes de pedirle al estudiante que escriba la referencia completa (ver la actividad del Módulo 5).
+
+El ejercicio de tipo `"choice-items"` ahora admite cualquier cantidad de opciones en `choiceLabels` (no solo dos) — por ejemplo, la actividad del Módulo 3 usa cinco botones ("Nivel 1" a "Nivel 5") para identificar el nivel de encabezado correcto.
 
 Para agregar otra actividad práctica a un módulo, copia el bloque de la lección `l1-6` dentro de `src/App.jsx` y ajusta:
 
