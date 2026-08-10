@@ -55,6 +55,8 @@ const VALID_CODES = ["APA-AGOSTO2026", "APA-SEPTIEMBRE2026", "GRUPO-METODOLOGIA"
 
 Cada vez que cambies este archivo, necesitas subir el cambio a GitHub para que se actualice en el sitio publicado (Vercel lo vuelve a publicar automáticamente).
 
+**Cuidado con el campo de texto de `src/Landing.jsx`:** el placeholder (el texto gris de ejemplo dentro de la casilla) es genérico a propósito ("Escribe tu código de acceso"). Nunca lo cambies por un código real de ejemplo — quedaría visible para cualquier visitante del sitio, sin necesidad de pagar.
+
 **Importante sobre seguridad:** este candado es simple a propósito — no requiere base de datos ni servidor. Es adecuado para un curso de bajo costo, igual que la carpeta compartida con la que empezaste. El código queda dentro del archivo público del sitio, así que alguien con conocimientos técnicos podría encontrarlo revisando el código fuente. Para la mayoría de los casos esto es una molestia menor, no un problema real — pero si más adelante vendes algo de mayor valor, conviene pasar a una plataforma con pagos automatizados (como Hotmart) o a un sistema con backend real.
 
 ## Requisitos

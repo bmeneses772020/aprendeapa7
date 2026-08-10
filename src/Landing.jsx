@@ -210,7 +210,7 @@ export default function Landing({ onUnlock }) {
           <input
             type="text"
             value={code}
-            placeholder="Ej. APA-AGOSTO2026"
+            placeholder="Escribe tu código de acceso"
             onChange={(e) => {
               setCode(e.target.value);
               setError(false);
