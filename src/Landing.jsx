@@ -74,7 +74,7 @@ export default function Landing({ onUnlock }) {
       <header className="ld-header">
         <BookOpen size={22} strokeWidth={2} />
         <div>
-          <div className="ld-brand">Ficha APA</div>
+          <div className="ld-brand">APA 7</div>
           <div className="ld-brand-sub">Curso de autogestión · Normas APA 7.ª edición</div>
         </div>
       </header>

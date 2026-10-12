@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FileText,
   PlayCircle,
@@ -167,10 +167,10 @@ const COURSE = {
                 "Lee cada afirmación y marca si necesitaría una cita si la usaras en un trabajo académico. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Necesita cita", "No necesita cita"],
               items: [
-                { id: "a", text: "\u201cEl agua hierve a 100 °C al nivel del mar.\u201d" },
-                { id: "b", text: "\u201cEl 68% de los hogares bolivianos cuenta con acceso a internet, según datos del INE de 2023.\u201d" },
-                { id: "c", text: "\u201cLa motivación intrínseca influye más en el aprendizaje autónomo que la motivación extrínseca, de acuerdo con estudios recientes de psicología educativa.\u201d" },
-                { id: "d", text: "\u201cBolivia está ubicada en América del Sur.\u201d" },
+                { id: "a", text: "\u201cEl agua hierve a 100 °C al nivel del mar.\u201d", correct: 1, explanation: "Es un hecho científico de conocimiento general, verificable en cualquier fuente básica de física." },
+                { id: "b", text: "\u201cEl 68% de los hogares bolivianos cuenta con acceso a internet, según datos del INE de 2023.\u201d", correct: 0, explanation: "Es un dato estadístico específico atribuible a una fuente (el INE); sin cita, el lector no puede verificarlo." },
+                { id: "c", text: "\u201cLa motivación intrínseca influye más en el aprendizaje autónomo que la motivación extrínseca, de acuerdo con estudios recientes de psicología educativa.\u201d", correct: 0, explanation: "Es una afirmación específica basada en estudios; debe atribuirse a quienes la investigaron." },
+                { id: "d", text: "\u201cBolivia está ubicada en América del Sur.\u201d", correct: 1, explanation: "Es conocimiento geográfico general, ampliamente conocido, que no requiere respaldo de una fuente." },
               ],
             },
             {
@@ -191,8 +191,8 @@ const COURSE = {
                   "\u201cEl aprendizaje autónomo depende de que el estudiante regule su propio proceso de manera consciente y sostenida en el tiempo.\u201d",
               },
               prompts: [
-                { id: "veredicto", label: "¿Cita, parafraseo o plagio? ¿Por qué?" },
-                { id: "reescritura", label: "Ahora inténtalo tú: reescribe el fragmento dando crédito a la autora, de la forma que consideres correcta" },
+                { id: "veredicto", label: "¿Cita, parafraseo o plagio? ¿Por qué?", sample: "Es un plagio: la versión del estudiante copia la oración original palabra por palabra, sin comillas ni cita, presentándola como si fuera propia." },
+                { id: "reescritura", label: "Ahora inténtalo tú: reescribe el fragmento dando crédito a la autora, de la forma que consideres correcta", sample: "Según Meneses (2024), el aprendizaje autónomo depende de que el estudiante regule conscientemente su proceso a lo largo del tiempo." },
               ],
             },
             {
@@ -201,8 +201,8 @@ const COURSE = {
               title: "Tu reflexión",
               instruction: "Responde en tus propias palabras.",
               prompts: [
-                { id: "q1", label: "¿Por qué existen las normas APA?" },
-                { id: "q2", label: "¿En qué situación de tu propia carrera vas a necesitar aplicarlas?" },
+                { id: "q1", label: "¿Por qué existen las normas APA?", sample: "Existen para dar crédito a las ideas de otros, evitar el plagio, y facilitar que cualquier lector pueda ubicar y verificar las fuentes usadas en un trabajo académico." },
+                { id: "q2", label: "¿En qué situación de tu propia carrera vas a necesitar aplicarlas?", sample: "Por ejemplo, al escribir una tesis o cualquier ensayo, necesito respaldar mis argumentos con fuentes confiables y dar crédito a los autores que ya investigaron sobre el tema." },
               ],
             },
           ],
@@ -337,10 +337,10 @@ const COURSE = {
                 "Lee cada afirmación sobre cómo alguien formateó su documento y marca si el formato es correcto o incorrecto según APA 7. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Correcto", "Incorrecto"],
               items: [
-                { id: "a", text: "\u201cUsé Times New Roman 12 pt para el cuerpo del texto, y Calibri 11 pt para las citas en bloque.\u201d" },
-                { id: "b", text: "\u201cConfiguré márgenes de 2.54 cm en los cuatro lados de la página.\u201d" },
-                { id: "c", text: "\u201cDejé una línea en blanco entre cada párrafo, además del interlineado doble.\u201d" },
-                { id: "d", text: "\u201cLa numeración de página empieza en la portada, en la esquina superior derecha.\u201d" },
+                { id: "a", text: "\u201cUsé Times New Roman 12 pt para el cuerpo del texto, y Calibri 11 pt para las citas en bloque.\u201d", correct: 1, explanation: "No se deben mezclar tipografías dentro del mismo documento; se usa una sola, del inicio al final." },
+                { id: "b", text: "\u201cConfiguré márgenes de 2.54 cm en los cuatro lados de la página.\u201d", correct: 0, explanation: "Es exactamente la medida que exige APA 7 (1 pulgada) en los cuatro lados." },
+                { id: "c", text: "\u201cDejé una línea en blanco entre cada párrafo, además del interlineado doble.\u201d", correct: 1, explanation: "Solo se usa doble espacio; no se agregan líneas en blanco adicionales entre párrafos." },
+                { id: "d", text: "\u201cLa numeración de página empieza en la portada, en la esquina superior derecha.\u201d", correct: 0, explanation: "Es correcto: el número de página va desde la portada, en la esquina superior derecha." },
               ],
             },
             {
@@ -351,10 +351,10 @@ const COURSE = {
                 "Lee cada situación y decide qué tipo de portada corresponde. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Estudiantil", "Profesional"],
               items: [
-                { id: "a", text: "Vas a entregar un ensayo para tu clase de Metodología de la Investigación Científica." },
-                { id: "b", text: "Vas a enviar un artículo a una revista científica para su publicación." },
-                { id: "c", text: "Tu docente te pide explícitamente incluir un encabezado (running head) en tu trabajo de curso." },
-                { id: "d", text: "Es la tesis que presentarás para tu grado, sin instrucciones especiales de tu comité." },
+                { id: "a", text: "Vas a entregar un ensayo para tu clase de Metodología de la Investigación Científica.", correct: 0, explanation: "Un trabajo de curso normal usa la portada estudiantil, salvo indicación distinta del docente." },
+                { id: "b", text: "Vas a enviar un artículo a una revista científica para su publicación.", correct: 1, explanation: "Las publicaciones destinadas a revistas usan la portada profesional, con encabezado y nota del autor." },
+                { id: "c", text: "Tu docente te pide explícitamente incluir un encabezado (running head) en tu trabajo de curso.", correct: 1, explanation: "Es la excepción: si el docente lo pide, se usa el encabezado propio de la portada profesional." },
+                { id: "d", text: "Es la tesis que presentarás para tu grado, sin instrucciones especiales de tu comité.", correct: 0, explanation: "Sin instrucciones especiales, la portada estudiantil es la opción por defecto." },
               ],
             },
             {
@@ -364,12 +364,12 @@ const COURSE = {
               instruction:
                 "Completa cada campo con tus propios datos, en el orden en que aparecerían en una portada estudiantil.",
               prompts: [
-                { id: "titulo", label: "Título de tu trabajo" },
-                { id: "autor", label: "Tu nombre completo" },
-                { id: "afiliacion", label: "Departamento y universidad" },
-                { id: "curso", label: "Número y nombre de la asignatura" },
-                { id: "docente", label: "Nombre del docente" },
-                { id: "fecha", label: "Fecha de entrega" },
+                { id: "titulo", label: "Título de tu trabajo", sample: "Uso de Recursos Audiovisuales en la Enseñanza Universitaria" },
+                { id: "autor", label: "Tu nombre completo", sample: "Betty Meneses Ayllón" },
+                { id: "afiliacion", label: "Departamento y universidad", sample: "Facultad de Ingeniería, Universidad Privada Domingo Savio" },
+                { id: "curso", label: "Número y nombre de la asignatura", sample: "MAT-0200: Estadística Descriptiva" },
+                { id: "docente", label: "Nombre del docente", sample: "Prof. [Nombre del docente]" },
+                { id: "fecha", label: "Fecha de entrega", sample: "15 de agosto de 2026" },
               ],
             },
           ],
@@ -525,11 +525,11 @@ const COURSE = {
                 "Lee la descripción de cada encabezado y marca a qué nivel corresponde. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4", "Nivel 5"],
               items: [
-                { id: "a", text: "Centrado, en negrita, sin cursiva: \u201cResultados\u201d" },
-                { id: "b", text: "Alineado a la izquierda, en negrita, sin cursiva: \u201cParticipantes\u201d" },
-                { id: "c", text: "Alineado a la izquierda, en negrita y cursiva: \u201cInstrumentos de recolección\u201d" },
-                { id: "d", text: "Con sangría de párrafo, en negrita, termina en punto y el texto continúa en la misma línea: \u201cProcedimiento de recolección. Se aplicó un cuestionario en línea…\u201d" },
-                { id: "e", text: "Con sangría de párrafo, en negrita y cursiva, termina en punto: \u201cAnálisis estadístico. Se utilizó estadística descriptiva…\u201d" },
+                { id: "a", text: "Centrado, en negrita, sin cursiva: \u201cResultados\u201d", correct: 0, explanation: "Centrado y en negrita, sin cursiva, es exactamente el formato del Nivel 1." },
+                { id: "b", text: "Alineado a la izquierda, en negrita, sin cursiva: \u201cParticipantes\u201d", correct: 1, explanation: "Alineado a la izquierda y en negrita, sin cursiva, corresponde al Nivel 2." },
+                { id: "c", text: "Alineado a la izquierda, en negrita y cursiva: \u201cInstrumentos de recolección\u201d", correct: 2, explanation: "La combinación de negrita y cursiva alineada a la izquierda es el Nivel 3." },
+                { id: "d", text: "Con sangría de párrafo, en negrita, termina en punto y el texto continúa en la misma línea: \u201cProcedimiento de recolección. Se aplicó un cuestionario en línea…\u201d", correct: 3, explanation: "Sangría, negrita sin cursiva, y el texto en la misma línea es el Nivel 4." },
+                { id: "e", text: "Con sangría de párrafo, en negrita y cursiva, termina en punto: \u201cAnálisis estadístico. Se utilizó estadística descriptiva…\u201d", correct: 4, explanation: "Sangría, negrita y cursiva juntas, con el texto en la misma línea, es el Nivel 5." },
               ],
             },
             {
@@ -540,11 +540,11 @@ const COURSE = {
                 "Lee cada situación y decide si respeta las reglas de jerarquía de encabezados. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Correcto", "Incorrecto"],
               items: [
-                { id: "a", text: "\u201cMi documento usa Nivel 1 para \u2018Método\u2019 y, dentro de esa sección, Nivel 2 para \u2018Participantes\u2019.\u201d" },
-                { id: "b", text: "\u201cSalté directamente del Nivel 1 al Nivel 3 porque no necesitaba un nivel intermedio.\u201d" },
-                { id: "c", text: "\u201cNuméré mis encabezados como 1., 1.1, 1.2 para que se vea más ordenado.\u201d" },
-                { id: "d", text: "\u201cEl título de mi trabajo, en la portada, lo conté como mi encabezado de Nivel 1.\u201d" },
-                { id: "e", text: "\u201cAjusté el salto de página porque un encabezado había quedado solo al final de una hoja.\u201d" },
+                { id: "a", text: "\u201cMi documento usa Nivel 1 para \u2018Método\u2019 y, dentro de esa sección, Nivel 2 para \u2018Participantes\u2019.\u201d", correct: 0, explanation: "Respeta el orden ascendente: Nivel 1 primero, Nivel 2 dentro de él." },
+                { id: "b", text: "\u201cSalté directamente del Nivel 1 al Nivel 3 porque no necesitaba un nivel intermedio.\u201d", correct: 1, explanation: "Nunca se debe saltar un nivel; si se necesita el Nivel 3, antes debe existir un Nivel 2." },
+                { id: "c", text: "\u201cNuméré mis encabezados como 1., 1.1, 1.2 para que se vea más ordenado.\u201d", correct: 1, explanation: "Los encabezados APA no llevan numeración; el formato ya indica la jerarquía." },
+                { id: "d", text: "\u201cEl título de mi trabajo, en la portada, lo conté como mi encabezado de Nivel 1.\u201d", correct: 1, explanation: "El título del trabajo es un elemento aparte, no cuenta dentro de la jerarquía de encabezados." },
+                { id: "e", text: "\u201cAjusté el salto de página porque un encabezado había quedado solo al final de una hoja.\u201d", correct: 0, explanation: "Es exactamente lo que corresponde hacer: un encabezado nunca debe quedar huérfano al final de una página." },
               ],
             },
             {
@@ -554,9 +554,9 @@ const COURSE = {
               instruction:
                 "Piensa en un trabajo que estés escribiendo (o uno futuro) y completa la jerarquía con tus propios encabezados.",
               prompts: [
-                { id: "n1", label: "Una sección principal de tu trabajo (será tu encabezado de Nivel 1)" },
-                { id: "n2", label: "Una subsección dentro de ella (Nivel 2)" },
-                { id: "n3", label: "Si tuvieras que profundizar aún más, ¿qué subdivisión usarías? (Nivel 3)" },
+                { id: "n1", label: "Una sección principal de tu trabajo (será tu encabezado de Nivel 1)", sample: "Marco teórico" },
+                { id: "n2", label: "Una subsección dentro de ella (Nivel 2)", sample: "Modelos pedagógicos digitales" },
+                { id: "n3", label: "Si tuvieras que profundizar aún más, ¿qué subdivisión usarías? (Nivel 3)", sample: "Aprendizaje invertido (flipped classroom)" },
               ],
             },
           ],
@@ -680,10 +680,10 @@ const COURSE = {
                 "Lee cada oración y marca qué forma de cita utiliza. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Narrativa", "Entre paréntesis"],
               items: [
-                { id: "a", text: "\u201cTobón (2013) sostiene que la evaluación por competencias exige evidencias observables.\u201d" },
-                { id: "b", text: "\u201cLa evaluación por competencias exige evidencias observables (Tobón, 2013).\u201d" },
-                { id: "c", text: "\u201cPérez y Gómez (2022) encontraron que la autorregulación mejora con el uso de calendarios de estudio.\u201d" },
-                { id: "d", text: "\u201cLa autorregulación mejora con el uso de calendarios de estudio (Pérez & Gómez, 2022).\u201d" },
+                { id: "a", text: "\u201cTobón (2013) sostiene que la evaluación por competencias exige evidencias observables.\u201d", correct: 0, explanation: "El apellido del autor forma parte de la oración: es una cita narrativa." },
+                { id: "b", text: "\u201cLa evaluación por competencias exige evidencias observables (Tobón, 2013).\u201d", correct: 1, explanation: "El autor y el año van entre paréntesis, al final de la idea." },
+                { id: "c", text: "\u201cPérez y Gómez (2022) encontraron que la autorregulación mejora con el uso de calendarios de estudio.\u201d", correct: 0, explanation: "Los apellidos forman parte de la oración: es narrativa." },
+                { id: "d", text: "\u201cLa autorregulación mejora con el uso de calendarios de estudio (Pérez & Gómez, 2022).\u201d", correct: 1, explanation: "Los autores y el año van entre paréntesis, con el símbolo '&'." },
               ],
             },
             {
@@ -694,10 +694,10 @@ const COURSE = {
                 "Lee cada fragmento y marca qué tipo de cita es. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Cita textual corta", "Cita en bloque", "Parafraseo"],
               items: [
-                { id: "a", text: "\u201cEl aprendizaje autónomo requiere \u2018autorregulación constante\u2019 (Meneses, 2024, p. 12).\u201d" },
-                { id: "b", text: "\u201cEl aprendizaje autónomo depende de que el estudiante regule su propio proceso, según plantea Meneses (2024).\u201d" },
-                { id: "c", text: "\u201cEl aprendizaje autónomo depende de un conjunto de estrategias de autorregulación que el estudiante despliega de manera consciente, incluyendo la planificación de metas, el monitoreo de su propio avance y la evaluación crítica de los resultados obtenidos (Meneses, 2024, p. 8).\u201d — presentado en párrafo aparte, con sangría completa" },
-                { id: "d", text: "\u201cMeneses (2024) explica que \u2018la autorregulación depende de la constancia y la disciplina del estudiante\u2019 (p. 8).\u201d" },
+                { id: "a", text: "\u201cEl aprendizaje autónomo requiere \u2018autorregulación constante\u2019 (Meneses, 2024, p. 12).\u201d", correct: 0, explanation: "Tiene comillas, menos de 40 palabras y número de página: es cita textual corta." },
+                { id: "b", text: "\u201cEl aprendizaje autónomo depende de que el estudiante regule su propio proceso, según plantea Meneses (2024).\u201d", correct: 2, explanation: "No usa comillas ni copia el texto original: es un parafraseo." },
+                { id: "c", text: "\u201cEl aprendizaje autónomo depende de un conjunto de estrategias de autorregulación que el estudiante despliega de manera consciente, incluyendo la planificación de metas, el monitoreo de su propio avance y la evaluación crítica de los resultados obtenidos (Meneses, 2024, p. 8).\u201d — presentado en párrafo aparte, con sangría completa", correct: 1, explanation: "Supera las 40 palabras y va en párrafo aparte con sangría: es cita en bloque." },
+                { id: "d", text: "\u201cMeneses (2024) explica que \u2018la autorregulación depende de la constancia y la disciplina del estudiante\u2019 (p. 8).\u201d", correct: 0, explanation: "Es una cita textual corta combinada con formato narrativo, con comillas y página." },
               ],
             },
             {
@@ -708,10 +708,10 @@ const COURSE = {
                 "Lee cada ejemplo de cita con más de un autor y decide si sigue correctamente las reglas de APA 7. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Correcto", "Incorrecto"],
               items: [
-                { id: "a", text: "\u201c(Pérez & Gómez, 2022)\u201d usado como cita entre paréntesis con dos autores." },
-                { id: "b", text: "\u201cPérez y Gómez (2022) señalan que\u2026\u201d usado como cita narrativa con dos autores." },
-                { id: "c", text: "\u201c(Rojas, Díaz, Fernández & Salas, 2021)\u201d citando por primera vez un trabajo de cuatro autores, nombrando a todos." },
-                { id: "d", text: "\u201c(Rojas et al., 2021)\u201d para citar, desde la primera mención, un trabajo con cuatro autores." },
+                { id: "a", text: "\u201c(Pérez & Gómez, 2022)\u201d usado como cita entre paréntesis con dos autores.", correct: 0, explanation: "Con dos autores, se usa '&' en la cita entre paréntesis: es correcto." },
+                { id: "b", text: "\u201cPérez y Gómez (2022) señalan que\u2026\u201d usado como cita narrativa con dos autores.", correct: 0, explanation: "En narrativa se usa 'y' en vez de '&': es correcto." },
+                { id: "c", text: "\u201c(Rojas, Díaz, Fernández & Salas, 2021)\u201d citando por primera vez un trabajo de cuatro autores, nombrando a todos.", correct: 1, explanation: "Con tres o más autores, se usa 'et al.' desde la primera cita, no se nombra a todos." },
+                { id: "d", text: "\u201c(Rojas et al., 2021)\u201d para citar, desde la primera mención, un trabajo con cuatro autores.", correct: 0, explanation: "Es exactamente la regla de APA 7 para tres o más autores desde la primera cita." },
               ],
             },
           ],
@@ -850,11 +850,11 @@ const COURSE = {
                 "Lee cada afirmación sobre cómo alguien armó su lista de referencias y marca si es correcta o incorrecta según APA 7. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Correcto", "Incorrecto"],
               items: [
-                { id: "a", text: "\u201cOrdené mis referencias por año de publicación, de más reciente a más antiguo.\u201d" },
-                { id: "b", text: "\u201cEscribí el título del libro con mayúscula en cada palabra principal.\u201d" },
-                { id: "c", text: "\u201cApliqué sangría francesa: la primera línea al margen, las siguientes a 1.27 cm.\u201d" },
-                { id: "d", text: "\u201cPresenté el DOI como enlace: https://doi.org/10.xxxx/xxxxx\u201d" },
-                { id: "e", text: "\u201cEscribí \u2018Recuperado de\u2019 antes del enlace de un artículo con DOI.\u201d" },
+                { id: "a", text: "\u201cOrdené mis referencias por año de publicación, de más reciente a más antiguo.\u201d", correct: 1, explanation: "El orden correcto es alfabético por apellido del primer autor, no por año." },
+                { id: "b", text: "\u201cEscribí el título del libro con mayúscula en cada palabra principal.\u201d", correct: 1, explanation: "Los títulos en la lista de referencias usan mayúscula tipo oración, no tipo título." },
+                { id: "c", text: "\u201cApliqué sangría francesa: la primera línea al margen, las siguientes a 1.27 cm.\u201d", correct: 0, explanation: "Es exactamente cómo debe aplicarse la sangría francesa en cada referencia." },
+                { id: "d", text: "\u201cPresenté el DOI como enlace: https://doi.org/10.xxxx/xxxxx\u201d", correct: 0, explanation: "El DOI siempre se presenta en formato de enlace." },
+                { id: "e", text: "\u201cEscribí \u2018Recuperado de\u2019 antes del enlace de un artículo con DOI.\u201d", correct: 1, explanation: "Ya no se escribe 'Recuperado de' en la mayoría de los casos, incluidos los DOI." },
               ],
             },
             {
@@ -865,10 +865,10 @@ const COURSE = {
                 "Lee cada referencia ya formateada y marca de qué tipo de fuente se trata.",
               choiceLabels: ["Libro", "Artículo con DOI", "Página web"],
               items: [
-                { id: "a", text: "Tobón, S. (2013). Formación integral y competencias: Pensamiento complejo, currículo, didáctica y evaluación (4.ª ed.). ECOE Ediciones." },
-                { id: "b", text: "Pérez, J., & Gómez, L. (2022). Autorregulación del aprendizaje en entornos virtuales. Revista de Educación Superior, 15(2), 45–60. https://doi.org/10.xxxx/xxxxx" },
-                { id: "c", text: "Organización Mundial de la Salud. (2021, 15 de marzo). Salud mental de los adolescentes. https://www.who.int/es/news-room/fact-sheets/detail/adolescent-mental-health" },
-                { id: "d", text: "Meneses, B. (2024). Autorregulación y aprendizaje autónomo en la educación superior. Editorial Universitaria." },
+                { id: "a", text: "Tobón, S. (2013). Formación integral y competencias: Pensamiento complejo, currículo, didáctica y evaluación (4.ª ed.). ECOE Ediciones.", correct: 0, explanation: "Tiene autor, año, título y editorial: es un libro." },
+                { id: "b", text: "Pérez, J., & Gómez, L. (2022). Autorregulación del aprendizaje en entornos virtuales. Revista de Educación Superior, 15(2), 45–60. https://doi.org/10.xxxx/xxxxx", correct: 1, explanation: "Tiene nombre de revista, volumen, número, páginas y DOI: es un artículo con DOI." },
+                { id: "c", text: "Organización Mundial de la Salud. (2021, 15 de marzo). Salud mental de los adolescentes. https://www.who.int/es/news-room/fact-sheets/detail/adolescent-mental-health", correct: 2, explanation: "Tiene fecha completa y una URL directa, sin datos de revista ni editorial: es una página web." },
+                { id: "d", text: "Meneses, B. (2024). Autorregulación y aprendizaje autónomo en la educación superior. Editorial Universitaria.", correct: 0, explanation: "Tiene autor, año, título y editorial: es un libro." },
               ],
             },
             {
@@ -882,11 +882,13 @@ const COURSE = {
                   id: "libro",
                   label:
                     "Datos de la fuente (libro):\nAutores: Cobo, C. y Moravec, J.\nAño: 2011\nTítulo: Aprendizaje invisible. Hacia una nueva ecología de la educación.\nLugar: Barcelona, España\nEditorial: UOC\n\nEscribe la referencia completa:",
+                  sample: "Cobo, C., y Moravec, J. (2011). Aprendizaje invisible. Hacia una nueva ecología de la educación. UOC.",
                 },
                 {
                   id: "articulo",
                   label:
                     "Datos de la fuente (artículo):\nAutores: Rueda-Toro, J., Arana, M., Buitrago, N., Sánchez, M., Pineda, A. y Orcasita, L.\nAño: 2019\nTítulo: Creencias de género, prácticas de crianza y apoyo social percibido: el caso de una pareja homosexual y una heterosexual\nFuente: Revista de Psicología Universidad de Antioquia, 11(2), 151-176\nDOI: https://doi.org/10.17533/udea.rp.v11n2a06\n\nEscribe la referencia completa:",
+                  sample: "Rueda-Toro, J., Arana, M., Buitrago, N., Sánchez, M., Pineda, A., y Orcasita, L. (2019). Creencias de género, prácticas de crianza y apoyo social percibido: el caso de una pareja homosexual y una heterosexual. Revista de Psicología Universidad de Antioquia, 11(2), 151-176. https://doi.org/10.17533/udea.rp.v11n2a06",
                 },
               ],
             },
@@ -1043,11 +1045,11 @@ const COURSE = {
                 "Lee cada afirmación sobre cómo alguien formateó su tabla o figura y marca si es correcta o incorrecta según APA 7. Justifica tu respuesta en una frase corta.",
               choiceLabels: ["Correcto", "Incorrecto"],
               items: [
-                { id: "a", text: "\u201cAgregué líneas verticales entre cada columna para que se vea más ordenada mi tabla.\u201d" },
-                { id: "b", text: "\u201cEl número de mi tabla va en negrita, arriba del título.\u201d" },
-                { id: "c", text: "\u201cEscribí el título de mi tabla con mayúscula en cada palabra principal, en cursiva.\u201d" },
-                { id: "d", text: "\u201cNuméré mis tablas y figuras en una sola secuencia conjunta (1, 2, 3\u2026).\u201d" },
-                { id: "e", text: "\u201cMencioné la Tabla 1 en el texto antes de que apareciera.\u201d" },
+                { id: "a", text: "\u201cAgregué líneas verticales entre cada columna para que se vea más ordenada mi tabla.\u201d", correct: 1, explanation: "APA 7 nunca usa líneas verticales; solo tres líneas horizontales." },
+                { id: "b", text: "\u201cEl número de mi tabla va en negrita, arriba del título.\u201d", correct: 0, explanation: "Es exactamente el formato correcto: número en negrita, arriba del título." },
+                { id: "c", text: "\u201cEscribí el título de mi tabla con mayúscula en cada palabra principal, en cursiva.\u201d", correct: 0, explanation: "A diferencia de las referencias, los títulos de tablas y figuras sí usan mayúscula tipo título, en cursiva." },
+                { id: "d", text: "\u201cNuméré mis tablas y figuras en una sola secuencia conjunta (1, 2, 3\u2026).\u201d", correct: 1, explanation: "Tablas y figuras llevan numeración independiente entre sí, no una secuencia conjunta." },
+                { id: "e", text: "\u201cMencioné la Tabla 1 en el texto antes de que apareciera.\u201d", correct: 0, explanation: "Es la regla correcta: toda tabla debe citarse en el texto antes de aparecer." },
               ],
             },
             {
@@ -1058,10 +1060,10 @@ const COURSE = {
                 "Lee cada nota y marca a qué tipo corresponde.",
               choiceLabels: ["Nota general", "Nota específica", "Nota de probabilidad"],
               items: [
-                { id: "a", text: "\u201cNota. Los datos se recolectaron en el segundo semestre de 2025.\u201d" },
-                { id: "b", text: "\u201c\u1d43 Grupo reasignado tras abandono inicial.\u201d" },
-                { id: "c", text: "\u201c*p < .05. **p < .01.\u201d" },
-                { id: "d", text: "\u201cNota. M = media; DE = desviación estándar.\u201d" },
+                { id: "a", text: "\u201cNota. Los datos se recolectaron en el segundo semestre de 2025.\u201d", correct: 0, explanation: "Da información global sobre la tabla: es una nota general." },
+                { id: "b", text: "\u201c\u1d43 Grupo reasignado tras abandono inicial.\u201d", correct: 1, explanation: "Usa una letra en superíndice para aclarar un dato puntual: es una nota específica." },
+                { id: "c", text: "\u201c*p < .05. **p < .01.\u201d", correct: 2, explanation: "Usa asteriscos para indicar niveles de significancia estadística: es una nota de probabilidad." },
+                { id: "d", text: "\u201cNota. M = media; DE = desviación estándar.\u201d", correct: 0, explanation: "Explica abreviaturas usadas en la tabla: es una nota general." },
               ],
             },
             {
@@ -1071,10 +1073,10 @@ const COURSE = {
               instruction:
                 "Piensa en un dato de tu propio trabajo que se explicaría mejor con una tabla, y complétalo aquí.",
               prompts: [
-                { id: "numero", label: "¿Qué número le corresponde? (Tabla 1, Tabla 2…)" },
-                { id: "titulo", label: "Escribe el título de esa tabla, en cursiva y con mayúscula tipo título" },
-                { id: "columnas", label: "¿Qué columnas tendría? (por ejemplo: Grupo, n, M, DE)" },
-                { id: "nota", label: "¿Necesitarías alguna nota al pie? Si es así, escríbela" },
+                { id: "numero", label: "¿Qué número le corresponde? (Tabla 1, Tabla 2…)", sample: "Tabla 1" },
+                { id: "titulo", label: "Escribe el título de esa tabla, en cursiva y con mayúscula tipo título", sample: "Puntajes Promedio de Autorregulación por Grupo de Estudio" },
+                { id: "columnas", label: "¿Qué columnas tendría? (por ejemplo: Grupo, n, M, DE)", sample: "Grupo, n, M, DE" },
+                { id: "nota", label: "¿Necesitarías alguna nota al pie? Si es así, escríbela", sample: "Nota. M = media; DE = desviación estándar. Los puntajes se midieron en una escala de 0 a 10." },
               ],
             },
           ],
@@ -1132,7 +1134,6 @@ export default function App({ onLock } = {}) {
   const [loaded, setLoaded] = useState(false);
   const [saveState, setSaveState] = useState("idle"); // idle | saving | saved
   const [confirmReset, setConfirmReset] = useState(false);
-  const saveTimer = useRef(null);
 
   // Cargar progreso guardado
   useEffect(() => {
@@ -1155,29 +1156,24 @@ export default function App({ onLock } = {}) {
     }
   }, []);
 
-  // Guardar progreso (con debounce breve)
+  // Guardar progreso (de inmediato — localStorage es rápido, no hace falta esperar)
   useEffect(() => {
     if (!loaded) return;
-    setSaveState("saving");
-    if (saveTimer.current) clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => {
-      try {
-        localStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify({
-            completed: Array.from(completed),
-            videoLinks,
-            checklistState,
-            practiceAnswers,
-            activeId,
-          })
-        );
-        setSaveState("saved");
-      } catch {
-        setSaveState("idle");
-      }
-    }, 400);
-    return () => clearTimeout(saveTimer.current);
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          completed: Array.from(completed),
+          videoLinks,
+          checklistState,
+          practiceAnswers,
+          activeId,
+        })
+      );
+      setSaveState("saved");
+    } catch {
+      setSaveState("idle");
+    }
   }, [completed, videoLinks, checklistState, practiceAnswers, activeId, loaded]);
 
   const markComplete = (id) => {
@@ -1663,80 +1659,149 @@ function PracticaLesson({ lesson, values, onChange }) {
           </div>
           <p className="fa-practica-instruction">{ex.instruction}</p>
 
-          {ex.kind === "choice-items" &&
-            ex.items.map((item) => {
-              const choiceKey = `${ex.id}-${item.id}-choice`;
-              const justifKey = `${ex.id}-${item.id}-justif`;
-              const choice = values[choiceKey];
-              const labels = ex.choiceLabels || ["Sí", "No"];
-              return (
-                <div className="fa-practica-item" key={item.id}>
-                  <p className="fa-practica-item-text">{item.text}</p>
-                  <div className="fa-practica-choices">
-                    {labels.map((label, li) => {
-                      const val = String(li);
-                      return (
-                        <button
-                          key={val}
-                          type="button"
-                          className={`fa-practica-choice${choice === val ? " is-selected" : ""}`}
-                          onClick={() => onChange(choiceKey, choice === val ? "" : val)}
-                        >
-                          {label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <textarea
-                    className="fa-practica-textarea"
-                    placeholder="Justifica tu respuesta en una frase corta…"
-                    rows={2}
-                    value={values[justifKey] || ""}
-                    onChange={(e) => onChange(justifKey, e.target.value)}
-                  />
-                </div>
-              );
-            })}
+          {ex.kind === "choice-items" && <ChoiceItemsBlock ex={ex} values={values} onChange={onChange} />}
 
           {ex.kind === "source-compare" && (
             <>
               <div className="fa-practica-source">
                 <span className="fa-practica-source-label">{ex.source.label}</span>
                 <p className="fa-practica-source-quote">{ex.source.quote}</p>
-                <p className="fa-practica-source-meta">{ex.source.meta}</p>
+                {ex.source.meta && <p className="fa-practica-source-meta">{ex.source.meta}</p>}
               </div>
-              <div className="fa-practica-source">
-                <span className="fa-practica-source-label">{ex.studentVersion.label}</span>
-                <p className="fa-practica-source-quote">{ex.studentVersion.quote}</p>
-              </div>
-              {ex.prompts.map((p) => (
-                <div className="fa-practica-prompt" key={p.id}>
-                  <label className="fa-practica-prompt-label">{p.label}</label>
-                  <textarea
-                    className="fa-practica-textarea"
-                    rows={3}
-                    value={values[`${ex.id}-${p.id}`] || ""}
-                    onChange={(e) => onChange(`${ex.id}-${p.id}`, e.target.value)}
-                  />
+              {ex.studentVersion && (
+                <div className="fa-practica-source">
+                  <span className="fa-practica-source-label">{ex.studentVersion.label}</span>
+                  <p className="fa-practica-source-quote">{ex.studentVersion.quote}</p>
                 </div>
+              )}
+              {ex.prompts.map((p) => (
+                <PromptField key={p.id} exId={ex.id} p={p} values={values} onChange={onChange} />
               ))}
             </>
           )}
 
           {ex.kind === "prompts" &&
             ex.prompts.map((p) => (
-              <div className="fa-practica-prompt" key={p.id}>
-                <label className="fa-practica-prompt-label">{p.label}</label>
-                <textarea
-                  className="fa-practica-textarea"
-                  rows={3}
-                  value={values[`${ex.id}-${p.id}`] || ""}
-                  onChange={(e) => onChange(`${ex.id}-${p.id}`, e.target.value)}
-                />
-              </div>
+              <PromptField key={p.id} exId={ex.id} p={p} values={values} onChange={onChange} />
             ))}
         </div>
       ))}
+    </div>
+  );
+}
+
+function ChoiceItemsBlock({ ex, values, onChange }) {
+  const [revealed, setRevealed] = useState(false);
+  const labels = ex.choiceLabels || ["Sí", "No"];
+  const allAnswered = ex.items.every((item) => values[`${ex.id}-${item.id}-choice`] !== undefined && values[`${ex.id}-${item.id}-choice`] !== "");
+
+  const retry = () => {
+    setRevealed(false);
+    ex.items.forEach((item) => {
+      onChange(`${ex.id}-${item.id}-choice`, "");
+    });
+  };
+
+  return (
+    <>
+      {ex.items.map((item) => {
+        const choiceKey = `${ex.id}-${item.id}-choice`;
+        const justifKey = `${ex.id}-${item.id}-justif`;
+        const choice = values[choiceKey];
+        const hasCorrect = typeof item.correct === "number";
+        return (
+          <div className="fa-practica-item" key={item.id}>
+            <p className="fa-practica-item-text">{item.text}</p>
+            <div className="fa-practica-choices">
+              {labels.map((label, li) => {
+                const val = String(li);
+                let stateClass = "";
+                if (revealed && hasCorrect) {
+                  if (li === item.correct) stateClass = " is-correct";
+                  else if (choice === val) stateClass = " is-wrong";
+                } else if (choice === val) {
+                  stateClass = " is-selected";
+                }
+                return (
+                  <button
+                    key={val}
+                    type="button"
+                    disabled={revealed}
+                    className={`fa-practica-choice${stateClass}`}
+                    onClick={() => onChange(choiceKey, choice === val ? "" : val)}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+            <textarea
+              className="fa-practica-textarea"
+              placeholder="Justifica tu respuesta en una frase corta…"
+              rows={2}
+              value={values[justifKey] || ""}
+              onChange={(e) => onChange(justifKey, e.target.value)}
+            />
+            {revealed && item.explanation && (
+              <p className="fa-practica-feedback">
+                {choice !== "" && Number(choice) === item.correct ? "Correcto. " : "No es correcto. "}
+                {item.explanation}
+              </p>
+            )}
+          </div>
+        );
+      })}
+
+      {!revealed ? (
+        <button
+          type="button"
+          className="fa-btn-secondary fa-practica-check-btn"
+          disabled={!allAnswered}
+          onClick={() => setRevealed(true)}
+        >
+          <CheckCircle2 size={14} strokeWidth={2} />
+          Revisar mis respuestas
+        </button>
+      ) : (
+        <button type="button" className="fa-btn-secondary fa-practica-check-btn" onClick={retry}>
+          <RotateCcw size={14} strokeWidth={2} />
+          Intentar de nuevo
+        </button>
+      )}
+    </>
+  );
+}
+
+function PromptField({ exId, p, values, onChange }) {
+  const [showSample, setShowSample] = useState(false);
+  const key = `${exId}-${p.id}`;
+
+  return (
+    <div className="fa-practica-prompt">
+      <label className="fa-practica-prompt-label">{p.label}</label>
+      <textarea
+        className="fa-practica-textarea"
+        rows={3}
+        value={values[key] || ""}
+        onChange={(e) => onChange(key, e.target.value)}
+      />
+      {p.sample && (
+        <>
+          <button
+            type="button"
+            className="fa-practica-sample-btn"
+            onClick={() => setShowSample((v) => !v)}
+          >
+            {showSample ? "Ocultar respuesta modelo" : "Ver respuesta modelo"}
+          </button>
+          {showSample && (
+            <div className="fa-practica-sample">
+              <span className="fa-practica-sample-label">Respuesta modelo</span>
+              <p>{p.sample}</p>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }
@@ -2361,6 +2426,28 @@ function Fonts() {
         display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px;
         white-space: pre-line; line-height: 1.5;
       }
+
+      .fa-practica-choice.is-correct { border-color: var(--sage); background: rgba(79,122,93,0.14); color: var(--ink); }
+      .fa-practica-choice.is-wrong { border-color: var(--wine); background: rgba(122,46,59,0.12); color: var(--wine); }
+      .fa-practica-choice:disabled { cursor: default; }
+      .fa-practica-feedback {
+        margin: 8px 0 0 0; font-size: 12px; color: var(--text-soft); line-height: 1.5;
+      }
+      .fa-practica-check-btn { margin: 4px 0 22px 34px; }
+
+      .fa-practica-sample-btn {
+        margin-top: 8px; background: none; border: none; color: var(--wine);
+        font-size: 12px; font-weight: 600; cursor: pointer; padding: 0; text-decoration: underline;
+      }
+      .fa-practica-sample {
+        margin-top: 8px; background: rgba(79,122,93,0.08); border: 1px solid var(--line);
+        border-radius: 6px; padding: 10px 12px;
+      }
+      .fa-practica-sample-label {
+        display: block; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700;
+        letter-spacing: 0.8px; text-transform: uppercase; color: var(--sage); margin-bottom: 5px;
+      }
+      .fa-practica-sample p { margin: 0; font-size: 13px; color: var(--text); line-height: 1.5; font-style: italic; }
 
       /* ---- Quiz ---- */
       .fa-quiz-q { margin-bottom: 22px; }

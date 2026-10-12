@@ -117,9 +117,23 @@ Para agregar otra actividad práctica a un módulo, copia el bloque de la lecci�
 - `title`, `duration`, `intro`
 - `pdfHref` (si generas un PDF descargable para esa actividad; si no, puedes omitir esta propiedad)
 - `exercises`: cada ejercicio tiene un `kind`:
-  - `"choice-items"` — una lista de afirmaciones con dos botones (por ejemplo, sí/no) y un campo de texto de justificación.
-  - `"source-compare"` — un fragmento original y una versión del estudiante, con preguntas abiertas debajo.
-  - `"prompts"` — una o más preguntas abiertas simples.
+  - `"choice-items"` — una lista de afirmaciones con dos o más botones de opción y un campo de texto de justificación. Cada `item` puede llevar `correct` (el índice de la opción correcta, empezando en 0) y `explanation` (el texto que se muestra al revisar). Si los agregas, aparece un botón "Revisar mis respuestas" que resalta en verde/rojo y muestra la explicación.
+  - `"source-compare"` — un fragmento original (y, opcionalmente, una versión del estudiante para comparar), con preguntas abiertas debajo.
+  - `"prompts"` — una o más preguntas abiertas simples. Cada `prompt` puede llevar `sample` (una respuesta modelo); si la agregas, aparece un botón "Ver respuesta modelo" debajo del campo de texto.
+
+### Retroalimentación en las actividades prácticas
+
+Los ejercicios de elección (`choice-items`) se autocalifican: al hacer clic en "Revisar mis respuestas", cada opción se resalta en verde (correcta) o rojo (si el estudiante eligió otra), y se muestra una breve explicación. El botón "Intentar de nuevo" reinicia el ejercicio.
+
+Los ejercicios de escritura abierta (`prompts` y `source-compare`) no tienen una única respuesta correcta, así que no se califican como verdadero/falso — en su lugar, cada pregunta puede mostrar una "respuesta modelo" para que el estudiante compare su propia redacción.
+
+### Retroalimentación: cómo sabe el estudiante si acertó
+
+Cada ejercicio de `"choice-items"` puede llevar, en cada ítem, una propiedad `correct` (el índice de la opción correcta, empezando en 0) y una `explanation` (el porqué). Cuando ambas están presentes, aparece un botón **"Revisar mis respuestas"** que resalta en verde la opción correcta y en rojo la que el estudiante marcó si se equivocó, mostrando la explicación debajo. El botón "Intentar de nuevo" reinicia el ejercicio.
+
+Cada pregunta dentro de `"prompts"` o `"source-compare"` puede llevar una propiedad `sample` (una respuesta modelo). Cuando está presente, aparece un botón **"Ver respuesta modelo"** individual debajo de esa pregunta, para que el estudiante compare su propia redacción — sin marcarla como correcta o incorrecta, porque este tipo de ejercicio no tiene una única respuesta válida.
+
+Si agregas una actividad práctica nueva, procura incluir `correct`/`explanation` en los ejercicios de elección y `sample` en las preguntas abiertas — de lo contrario, esos ejercicios se mostrarán sin retroalimentación (el estudiante podrá responder, pero no revisar ni comparar).
 
 ## Progreso de los estudiantes
 
