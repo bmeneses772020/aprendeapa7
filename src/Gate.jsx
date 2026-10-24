@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import App from "./App.jsx";
 import Landing from "./Landing.jsx";
+import EcAccess from "./EcAccess.jsx";
+import { isEcMode, VISTA_LIBRE, ACCESO_LIBRE } from "./ec.js";
 
 const ACCESS_KEY = "ficha-apa-access-v1";
 
@@ -9,11 +11,13 @@ const ACCESS_KEY = "ficha-apa-access-v1";
  * Agrega o cambia códigos aquí cuando quieras — no distingue mayúsculas/minúsculas.
  * Ejemplo: puedes usar un código distinto cada mes, o uno por cada grupo de estudiantes.
  */
-const VALID_CODES = ["APA-AGOSTO2026"];
+const VALID_CODES = ["APA-AGOSTO2026", "EDUCON-APA7"];
 
 export default function Gate() {
   const [unlocked, setUnlocked] = useState(false);
   const [ready, setReady] = useState(false);
+  const [ec] = useState(() => isEcMode());
+  const abierto = ACCESO_LIBRE || (ec && VISTA_LIBRE);
 
   useEffect(() => {
     try {
@@ -50,5 +54,5 @@ export default function Gate() {
 
   if (!ready) return null;
 
-  return unlocked ? <App onLock={lockAgain} /> : <Landing onUnlock={tryUnlock} />;
+  return unlocked || abierto ? <App onLock={abierto ? undefined : lockAgain} /> : ec ? <EcAccess onUnlock={tryUnlock} /> : <Landing onUnlock={tryUnlock} />;
 }

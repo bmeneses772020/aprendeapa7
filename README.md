@@ -147,3 +147,7 @@ El progreso (lecciones completadas, respuestas de las listas de chequeo, enlaces
 
 Msc. Betty Meneses Ayllón — Universidad Privada Domingo Savio
 
+
+## Modo Educación Continua (sin cobro)
+
+Este curso también puede usarse dentro de la página **Cursos Educación Continua** (https://portalformacontinuasin.vercel.app/). Cuando el participante entra desde esa página (dirección terminada en `?ec=1`), no ve el precio ni el pago: solo la pantalla de código de acceso. El código para los talleres es `EDUCON-APA7` (se cambia en `src/Gate.jsx`, lista `VALID_CODES`). Al completar el 100 % de las lecciones, aparece el botón «Volver y desbloquear el siguiente». La dirección de la página de Educación Continua se configura en `HUB_URL` de `src/ec.js`.

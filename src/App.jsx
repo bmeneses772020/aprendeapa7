@@ -16,6 +16,7 @@ import {
   PenSquare,
   Download,
 } from "lucide-react";
+import { isEcMode, completionUrl, HUB_URL } from "./ec.js";
 
 /* ------------------------------------------------------------------ */
 /* CONTENIDO DEL CURSO                                                 */
@@ -1242,6 +1243,22 @@ export default function App({ onLock } = {}) {
           </div>
         </div>
       </header>
+
+      {isEcMode() && (
+        <div style={{ background: progressPct === 100 ? "#E6F0E4" : "#F3ECDD", borderBottom: "1px solid #DDD3BE", padding: "10px 24px", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "space-between", fontSize: 14 }}>
+          <span>
+            {progressPct === 100
+              ? "¡Completaste este curso! Vuelve a Educación Continua para desbloquear el siguiente."
+              : "Estás en el programa de Educación Continua."}
+          </span>
+          <a
+            href={progressPct === 100 ? completionUrl() : HUB_URL}
+            style={{ background: progressPct === 100 ? "#0B3D42" : "transparent", color: progressPct === 100 ? "#fff" : "#0B3D42", border: "1px solid #0B3D42", borderRadius: 8, padding: "7px 14px", textDecoration: "none", fontWeight: 600 }}
+          >
+            {progressPct === 100 ? "Volver y desbloquear el siguiente" : "← Educación Continua"}
+          </a>
+        </div>
+      )}
 
       <div className="fa-body">
         {/* -------- Sidebar -------- */}
